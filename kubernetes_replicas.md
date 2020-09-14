@@ -30,3 +30,16 @@ Kubelet is also watching the API server. It detected that the two Pods were assi
 Kubelet sent requests to Docker requesting the creation of the containers that form the Pod. In our case, the Pod defines two containers based on the mongo and api image. So in total four containers are created.
 
 Finally, Kubelet sent a request to the API server notifying it that the Pods were created successfully.
+
+
+### To Sum up
+
+ReplicaSets are used to scale Pods and makes sure the desired number of Pods run.
+
+When compared with the replication Controllers, ReplicaSets have an extended support for selectors.
+
+`apiVersion`, `kind`, `metadata` are mandatory when defining a Kubernetes object.
+
+`--cascade=false` argument is used to prevent Kubernetes from removing the downstream objects.
+
+
