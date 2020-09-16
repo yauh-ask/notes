@@ -10,26 +10,28 @@ Example:
 
 FROM python:3.9-rc-buster
 
-# Setting up Docker environment
-WORKDIR /code
-# Export env variables.
+Setting up Docker environment:  WORKDIR /code
+
+Export env variables:
+
 ENV FLASK_APP app.py
 ENV FLASK_RUN_HOST 0.0.0.0
-###
 
+Copy requirements file from current directory to file in containers code directory we have just created:
 
-#Copy requirements file from current directory to file in 
-#containers code directory we have just created.
 COPY requirements.txt requirements.txt
 
-#Run and install all required modules in container
+Run and install all required modules in container:
+
 RUN pip3 install -r requirements.txt
 
-#Copy current directory files to containers code directory
+Copy current directory files to containers code directory:
 COPY . .
 
-#RUN app.
+RUN app.
 CMD ["flask", "run"]
+
+#### To recap
 
 FROM #
 The FROM keyword tells Docker which base image to use or what should be the main platform for this image.
