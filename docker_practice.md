@@ -39,3 +39,41 @@ print(current_date)
 The output:
 python current_time.py 
 04-26-2020
+
+
+##### another example
+
+- script file as date_time.py:
+
+import datetime, pytz
+
+c: Timezone can be changed to any allowed values.
+current_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime(" %m.%d.%Y %H:%M:%S %z")
+
+print(current_time)
+
+- requirements file.txt
+Comment: required Libraries
+pytz==2018.7
+
+- dockerfile
+c: Base image to build
+
+FROM python:3.8
+
+c: Work directory specific to web IDE, You can change if you are running on your Local Machine
+WORKDIR /exercise_2
+
+c: COPY requirements.txt to container before running the code. This way any change in requirements will affect only one layer.
+
+COPY requirements.txt requirements.txt
+
+c: Install required libraries
+
+RUN pip install -r requirements.txt
+
+c: Add code file to container directory.
+ADD . .
+
+c: Running the code file. You can also use ENTRYPOINT here.
+CMD [ "python", "date_time.py" ]
