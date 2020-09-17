@@ -77,3 +77,7 @@ ADD . .
 
 c: Running the code file. You can also use ENTRYPOINT here.
 CMD [ "python", "date_time.py" ]
+
+
+ P.S. Now that all dependencies are installed, we will copy our code files from the host machine to the container with ADD . . “.” represents the current directory of the host and container. Since we have already mentioned the WORKDIR, Docker will consider the WORKDIR as the current working directory.
+Finally, we run our python script with CMD ["python", "date_time.py"]
