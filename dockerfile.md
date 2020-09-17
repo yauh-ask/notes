@@ -118,3 +118,20 @@ And the container will continue running in the background. The id is a full SHA2
 `docker logs <CONTAINER ID>`
 
 real-time: `docker logs -f <CONTAINER ID>`
+
+
+##### to recap
+
+
+How do you map a host port to the container port?
+`docker run -p 5000:5000 flask_app:1.0`
+
+What is the use of `lsof -i TCP:5000` command?
+To list all the processes using port 5000.
+
+In `docker build .` command, what does . stands for?
+
+It represent the location of Dockefile, and . means current directory. In linux . represent the current working directory.
+
+
+
