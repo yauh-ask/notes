@@ -32,6 +32,7 @@ Token Ring networks vanished from networking industry long way back. New Cisco r
 Note: Only 10Mbps Ethernet interface has a name "Ethernet" in a Cisco Router. A 100Mbps Ethernet interface is called a "FastEthernet" interface and a 1000Mbps Ethernet interface is called a "GigabitEthernet" interface.
 
 
-https://www.netwrix.com/cisco_commands_cheat_sheet.html
-https://www.packettracernetwork.com/labs/packettracerlabs.html
-https://www.digitalocean.com/community/tutorials/an-introduction-to-networking-terminology-interfaces-and-protocols
+[Commands](https://www.netwrix.com/cisco_commands_cheat_sheet.html)
+
+[Packet Tracer Labs](https://www.packettracernetwork.com/labs/packettracerlabs.html)
+[Terms Intro](https://www.digitalocean.com/community/tutorials/an-introduction-to-networking-terminology-interfaces-and-protocols)
