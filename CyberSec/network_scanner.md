@@ -20,3 +20,7 @@ To spoof ARP is to set the IP of the victim as yours (hacker's) so that in the i
 `echo 1 > proc/sys/net/ipv4/ip_forward` to enable port forwarding to allow packets to flow through it just as a router
 
 `pip install scapy_http` considered to be deprecated, yet good to look around along with [Berkeley Packet Filter (BPF) syntax](https://biot.com/capstats/bpf.html)
+
+`iptables -I FORWARD -j NFQUEUE --queue-num 0` command to 'trap' victim's packets in a queue. To test locally instead of `FORWARD` to `OUTPUT` + `INPUT` in 2 commands (aka redirecting output and input chains). To set it back `ìptables --flush`
+
+`pip install netfilterqueue` - a module to extract queueing packets, deprecated of Jan 2020
