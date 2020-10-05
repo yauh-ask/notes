@@ -18,3 +18,5 @@ To spoof ARP is to set the IP of the victim as yours (hacker's) so that in the i
 `arpspoof -i eth0 -t 10.0.2.1 10.0.2.7` - to implement the same but with the router. This attack works against ethernet, wireless
 
 `echo 1 > proc/sys/net/ipv4/ip_forward` to enable port forwarding to allow packets to flow through it just as a router
+
+`pip install scapy_http` considered to be deprecated, yet good to look around along with [Berkeley Packet Filter (BPF) syntax](https://biot.com/capstats/bpf.html)
