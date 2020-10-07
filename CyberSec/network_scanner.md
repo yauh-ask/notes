@@ -23,4 +23,6 @@ To spoof ARP is to set the IP of the victim as yours (hacker's) so that in the i
 
 `iptables -I FORWARD -j NFQUEUE --queue-num 0` command to 'trap' victim's packets in a queue. To test locally instead of `FORWARD` to `OUTPUT` + `INPUT` in 2 commands (aka redirecting output and input chains). To set it back `ìptables --flush`
 
-`pip install netfilterqueue` - a module to extract queueing packets, deprecated of Jan 2020
+`pip install netfilterqueue` - a module to extract queueing packets, deprecated of Jan 2020, see the dependecies to install for running via `python`
+
+To intercept the file with your own file, run your webserver on Kali, from var => www => html put in the folder with necessary files. Run the server `service apache2 start` => `iptables -I FORWARD -j NFQUEUE --queue-num 0` => run ./arp_spoof.py to become a man in the middle, not to forget ip forwarding `echo 1 > proc/sys/net/ipv4/ip_forward` to allow the packet to flow through the Kali machine and prevent the disabling of internet surfing on the victim's machine.
