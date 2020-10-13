@@ -40,3 +40,5 @@ XSS Defense: Content Security Policy (CSP)
 
 CSP and 'unsafe-inline'
 Banning script tags by less JS in HTML as possible: crypto nonces must be generated per pageload and change unpredictably or sha256 (checksum to CSP).
+
+[Helmet to secure Express apps](https://github.com/helmetjs/helmet)
