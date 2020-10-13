@@ -37,3 +37,6 @@ XSS Defense: Content Security Policy (CSP)
 - Multiple directives are separated by semicolon / re-defining the directive with the same name has no effect / by default directives are permissive
 
 [List of CSP-directives](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
+
+CSP and 'unsafe-inline'
+Banning script tags by less JS in HTML as possible: crypto nonces must be generated per pageload and change unpredictably or sha256 (checksum to CSP).
