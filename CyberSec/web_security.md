@@ -1,4 +1,4 @@
-Cross-Site Scripting.
+**Cross-Site Scripting.**
 
 Types of XSS attacks:
 
@@ -42,3 +42,30 @@ CSP and 'unsafe-inline'
 Banning script tags by less JS in HTML as possible: crypto nonces must be generated per pageload and change unpredictably or sha256 (checksum to CSP).
 
 [Helmet to secure Express apps](https://github.com/helmetjs/helmet)
+
+
+**CSRF or Cross-site request forgery**
+
+To revise
+
+**Clickjacking**
+
+To revise
+
+**Third Party Assets**
+
+1. The people who write dependencies make mistakes, thus:
+- reproducible builds, with a lockfile
+- use LTS(long-term-support) versions where you care less about bleeding edge features
+- support bug bounties in important open source project (Open Collective as a support, filter on issue "security")
+- tests that assert only expected requests are sent out (eg, chrome to track url packages)
+- subresource integrity attributes (alike to content-security-policy), e.g. adding a hash in a tag `integrity="sha256...` is like a checksum of the contents of this file
+
+2. Vendor Tags:
+- these can be updated independently of your deploys
+- definitely to avoid adding the scripts which add more scripts
+- when "fail secure" is desired, add your own SRI to the script tags
+- ask that you vendors VERSION the scripts, so you have control over when nex code lands (and you SRI does not break)
+ for js library scanning as a service - https://snyk.io/
+ 
+ 
