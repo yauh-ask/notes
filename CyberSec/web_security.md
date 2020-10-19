@@ -87,3 +87,15 @@ To revise
  - make a new certificate signing request `openssl req -new \ key my-private.key \ -out my-request.csr`
  - sign the certificate with your prvate key `openssl x509 -req -days 3 \ -in my-request.csr \ -signkey my-private.key \ -out my-certificate.crt`
  
+ 
+ **HTTPS Downgrading**
+ 
+ To prevent:
+ 
+ - Content-Security-Policy: upgrade-insecure-requests
+ - Browser pluggins attempt a "secure upgrade" whenever possible
+ 
+ To prevent based on bad certificate:
+ 
+ - HTTP response header for that: `Strict-Transport-Security: max-age=31536000; includeSubDomains` : includeSubDomains option prevents a broad range of cookie manipulation attacks
+ - Add your domain to https://hstspreload.org/ 
