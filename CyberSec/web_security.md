@@ -69,3 +69,21 @@ To revise
  for js library scanning as a service - https://snyk.io/
  
  
+ **HTTPS**
+ 
+ - 2 types of encryption involved: symmetric and Public Key
+ -- Public Key is for WRITING messages while Private Key for READING messages
+ -- RSA algorithm: product of two huge prime numbers, + exponential math is involved, practical limit on size of message + Private Key can be used to SIGN message
+ 
+ 
+ *MITM Defense: OpenSSL*
+ 1. Industry standart library for crypto
+ 2. Do not implement your own algorithms, protocols or shakes...
+ 
+ There is a range of cli to work with OpenSSL as
+ 
+ - generate a private key `openssl genrsa -aes128 -out my-private.key 2048`
+ - generate a public key from a private key `openssl rsa -pubout \ -in my-private.key \ -out my-public.key`
+ - make a new certificate signing request `openssl req -new \ key my-private.key \ -out my-request.csr`
+ - sign the certificate with your prvate key `openssl x509 -req -days 3 \ -in my-request.csr \ -signkey my-private.key \ -out my-certificate.crt`
+ 
