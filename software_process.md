@@ -63,3 +63,20 @@ The waterfall model is categorized as a plan-driven process since it requires a 
 This model works best in large organizations that have several people working on large-scale projects which need detailed paperwork and records to coordinate 
 with one another. However, in the case of personal websites or small projects, this approach may prove to be unnecessarily meticulous and extraneous since 
 there is no need to keep elaborate records in that situation.
+
+
+**Agile**
+
+The incremental development approach is a fundamental agile process that entails interleaving the activities of specification, development, and validation. The system is then developed as a series of versions or increments, with each version adding functionality to the previous version.
+
+The underlying idea in the incremental development process is to develop an initial version of your website, open it to feedback, and then incrementally develop newer versions based on this feedback. In this case, the specification, development, and validation phases all happen concurrently and feed into one another.
+
+Incremental software development is better suited than a waterfall approach to most business and personal systems. This is because incremental development is a more intuitive way of solving problems. It is the equivalent of moving toward a solution in a series of steps, backtracking on mistakes, and iteratively reaching a solution. Moreover, developing the software incrementally means it is cheaper and easier to add changes to it while it is still being developed instead of having to wait for problems to be discovered after undergoing the entire development process.
+
+## Incremental development vs. waterfall model
+
+As we have already seen, the incremental development model is more intuitive than the waterfall model for developing the most common website use cases. In addition to this, there are a number of other benefits that incremental development has compared to the waterfall model, and they are enumerated as follows:
+
+The cost of accommodating changing customer requirements diminishes significantly in this case as the amount of analysis and documentation that has to be redone is much less than in the waterfall model.
+It is easier to get customer feedback on the development work that has been done since they can comment on physical demonstrations of the software and see how much has been implemented as opposed to judging from software design documents.
+More rapid delivery and deployment of useful software to the customer is possible, even if all of the functionality has not been included. Customers are able to use and gain value from the software earlier than is possible with a waterfall process.
