@@ -1,0 +1,186 @@
+Why is container security relevant for your CI/CD pipeline?
+An introduction
+
+Containers are believed to be less secure than virtual machines because if there's a vulnerability in the container host kernel, it could
+provide a way into the containers that are sharing it. Hypervisors used for virtual 
+machines might also contain vulnerabilities, but since a hypervisor provides far less functionality than a Linux kernel 
+(which typically implements file systems, networking, application process controls and so on) it presents a much smaller attack surface.
+
+However, compared to VM or bare metal, containerized environments have many more layers of abstraction that require specialized tools 
+to interpret, monitor, and protect these new applications. In a production container environment, you have a number of different layers to secure. 
+In addition to the host OS and the container runtime, you have an orchestrator, a container registry, images, and most likely several different 
+microservices within your application. Finally, containerized applications add complexity by redefining the old notion of protecting a single “perimeter”, 
+requiring new approaches for securing the network layer.
+
+In the last couple of years a great deal of effort has been devoted to developing software to enhance the security of containers.
+
+For example, Docker (and other container systems) now include a signing infrastructure allowing administrators to sign container images to prevent untrusted 
+containers from being deployed.
+
+However, it is not necessarily the case that a trusted, signed container is secure to run, because vulnerabilities may be discovered in some of the software
+in the container AFTER it has been signed. For that reason, Docker and others offer container security scanning solutions that can notify administrators if any 
+container images have vulnerabilities that could be exploited.
+
+
+- As container adoption rises, so should concerns about best practices for container security to not only protect running containers in production, 
+but also secure containers across the full application lifecycle.
+
+# Image vulnerabilities and compliance concerns
+
+Individual container images (particularly those from inadequately managed public repositories) may contain malicious code, 
+either by design, by injection, or as a result of inadequate security during development. 
+Needless to say, using an image that has been compromised in this manner places your entire application at risk.
+
+# Securing the registry
+
+While public registries have their own access policies, a private repository hosted by a public registry (such as Docker Hub) 
+will provide you with at least basic control over access.
+
+A private registry should give you fine-grained, role-based access control, allowing you to precisely define the conditions under which access 
+is allowed to each role. This kind of granularity is a necessity for production, but it is also important across the development cycle.
+
+# Orchestration concerns
+
+Complete runtime container security also requires securing orchestration systems, which may present vulnerabilities that offer even more attack 
+surfaces to malicious actors. At the same time, the Kubernetes API server and Docker runtime are also at risk from exploits.
+
+Among the lessons to be learned from the growing number of issues discovered over time in Kubernetes is that there will be more, 
+and they will be discoverable across the different stages of the software development lifecycle (SDLC). In other words, 
+Kubernetes is just like any other new, critical infrastructure component introduced in an application development environment.
+
+# Protecting the Host OS
+
+Containers make everything faster and more efficient but because they are sharing the same kernel used by the OS,
+exploiting a container might lead to a system-wide compromise.
+
+If the host kernel is vulnerable than all the containers are vulnerable
+
+# Container runtime protection
+
+Is to be regarded as the closing step to container security, at the far end of the SDLC
+
+
+
+## Creating Secure Container Images
+There's a fundamental problem with container security that is very similar to the one associated with any sort of binary executable: you really don't 
+know what's on the inside. Once something is compiled into a binary format, its internals become opaque. 
+
+You might think that you've downloaded a container image that does nothing more than run a web site that converts .csv files to .json format.
+Yet behind the scenes, that container also has code that's probing your network in search of passwords, credit card information, and encryption keys.
+
+RunC, the container runtime for Docker, Kubernetes and other container orchestration technologies, has been reported to contain vulnerabilities that 
+allows a bad actor container to overwrite RunC in order to get root-level access to the host. Once a container has root-level access, it's effectively in 
+control of the system.
+
+An example 
+
+A container image is the template from which a container is created and run. You can think of a container as an instance of a container image, very much in the same way that an object is an instance of a class in object-oriented programming. A container image is created by running the Docker command docker build . For example:
+
+docker build -t pinger:v1 .
+where:
+
+- docker is the command
+- build is the subcommand
+- -t indicates the name of the container image and optional tag name
+- pinger:v1 is the name of the container image to build according to the defined Dockerfile
+- . indicates using the Dockerfile local to the build command
+
+When docker build is invoked, Docker looks for a file named, Dockerfile, which typically is at the location in the file system where the build command is 
+invoked when indicated by the dot in the build example shown above. docker build uses the information in the Dockerfile to construct the container image.
+
+Creating a secure container can be a challenge due to the nature of container construction itself. Take a look below. It's the Dockerfile for a simple NodeJS 
+web application.
+
+FROM node:8.15-alpine
+
+EXPOSE 3000
+COPY server.js .
+CMD node server.js
+The Dockerfile tells Docker to do four things to build the container image.
+
+Download a base container image, node:8.0-alpine from the DockerHub repository.
+This base image has the executable and operating system libraries necessary to run Node.js;
+Open port 3000 on the container in order to allow users to access the web application;
+Copy the file server.js from my local filesystem into the container image. server.js is the file that contains the application behavior the node will run;
+And, finally, invoke Node JS to run the file.
+The issue is the base container image, node:8.15-alpine. 
+
+The way Docker works is that one container image can use another container image(s) as a base. Then, once the base image(s) is defined, 
+the container image under construction will build upon the base image(s).
+
+This architecture is very efficient in that it allows developers to leverage existing work. For example, when I want to create a Node application as a 
+Docker image, all I need is to define a pre-existing Node.js container and add my application code, as you can see in the Dockerfile shown above. 
+I don't have to get all the dependencies that Node.js requires. The base Node.js container image takes care of all that.
+
+However, building an application into a container image that uses a pre-existing base image creates a security problem.
+Unless certain precautions are taken, we have no way of knowing what's in that base container image. Remember, the base container image comes 
+from DockerHub, which is a third-party repository external to the enterprise. We can hope it's a good actor, but how do we know for sure?
+
+This is the first line of the Dockerfile for node:8.15-alpine.
+
+FROM alpine:3.8
+One container image is using another container image !
+
+The reality is that any Docker image is but the last link in a chain of other Docker images. That chain might be very, very long.
+
+How do we ensure the security of the container image?
+
+The first thing to do at the enterprise level is to make sure that there is a central authority that builds container images and that
+all container images are stored on a common secure repository. This means that while developers can and should create container images 
+for their local work, they should never be the authority to deploy an image. Rather, developers need to deploy their Dockerfiles only and 
+let qualified personnel do security tests against the given Dockerfile, as well as the container images and containers that are the product 
+of the Dockerfile.
+
+Qualified security personnel will not only test and build container images and continuously verify that the containers that are running 
+in production are not malicious, but they will also deploy well-tested container images to repositories that are properly secured.
+Such repositories might be hosted by a third party that provides security certification such as  DockerHub or Google Container Registry,
+or the container images might be hosted privately on-premises and subject to inspection using well-respected analysis tools. 
+
+Container Build Policy
+Controlling container build events and applying testing and tools to ensure container security are good and useful practices. 
+But, the implementation of such practices needs to be part of an overall container build and testing security policy.
+The depth and breadth of such a policy will vary according to the company and inherent risks. Some companies might allow using base images 
+that are deemed safe and "official" by well-known repository hosts such as DockerHub. Other companies might be more stringent and require that 
+all container images be built from scratch and stored in private repositories on-premises, under tight access control. It's a matter of risk and impact. 
+But, regardless of the degree of scrutiny exerted, the most important thing to understand is that ensuring security at the container image level is important 
+and that an adequate container image security testing policy must be published. Also, the procedures to ensure compliance 
+with the policy must be in force.
+
+
+## Container Image Security scanning
+When you look at the current market for container security tools (Anchore, Aquasec, Twistlock, Sysdig, ClairOS, Falco) it is important to distinguish two types of tools: enterprise and open-source. Depending on a number of factors such as budget, features, support, etc. it might influence someone's decision. 
+When you take an open-source tool then:
+
+support might not be a given fact and you will need to rely on the community
+it will not be as fancy as an enterprise tool always
+you might have fewer functionalities to address your organizational challenges
+you will have to build the integrations with other tools yourself if the community did not look into it yet
+But the benefits are :
+
+no costs for the tool itself
+a steep learning curce by solving technical issues
+a way to start with a certain topic before investing a lot of energy and budget
+that integrations can be built in-house if you have the engineering power
+It is always important from a best practice standpoint to first get insights into your security posture and make sure that all the stakeholders 
+
+
+
+CLAIR
+
+In the Hands-on lab you will use Clair.
+
+Clair is an open source project for the static analysis of vulnerabilities in appc and docker containers.
+
+Vulnerability data is continuously imported from a known set of sources and correlated with the indexed contents of container 
+images in order to produce lists of vulnerabilities that threaten a container. When vulnerability data changes upstream, 
+the previous state and new state of the vulnerability along with the images they affect can be sent via webhook to a configured endpoint. 
+All major components can be customized programmatically 
+
+HANDOLINT
+
+Hadolint is a smarter Dockerfile linter that helps you build best practice Docker images. 
+The linter is parsing the Dockerfile into an AST (Asynchronous System Trap) and performs rules on top of the AST. 
+It is standing on the shoulders of ShellCheck to lint the Bash code inside RUN instructions
+at compile-time without forking the project.
+(Development, Operations, Business) are on one line. 
+After maturing you can start looking into raising the bar. 
