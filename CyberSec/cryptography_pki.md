@@ -43,7 +43,7 @@ Digital Signature Standart, its approves algorithms:
 - Elliptic Curve Digital Signature Algorithm (ECDSA)
 
 
-
+Command to generate a key for certificate: `openssl req --new --newkey rsa:2048`
 
 
 
