@@ -32,3 +32,37 @@ This does the same work as the -e argument in Docker while running a container.
 
 All the clauses or keywords above are commonly used keywords, which are enough to start a development workflow. 
 
+`docker-compose build`
+This command builds images of the mentioned services in the docker-compose.yml file for which a Dockerfile is provided.
+The job of the ‘build’ command is to get the images ready to create containers. If a service is using the prebuilt image, it will skip that service.
+
+`docker-compose images`
+This command lists images built using the current docker-compose file.
+
+`docker-compose run`
+Similar to docker run command, this one creates containers from images built for the services mentioned in the compose file.
+It runs a specific service provided as an argument to the command.
+
+`docker-compose up`
+This does the job of the docker-compose build and docker-compose run commands. It initially builds the images if they are not located locally and then starts the containers.If images are already built, it will fork the container directly. We can force it to rebuild the image by adding a --build argument.
+
+
+
+Priority of .env variables
+There are multiple ways we can use the environment variables in Docker, which includes,
+
+ENV in Dockerfile
+environment keyword in docker-compsoe.yml file
+-e option from the command line
+
+So, docker-compose has precedence levels to overcome the clash of variables. Let’s see those.
+
+When you set the same environment variable in multiple files, here’s the priority used by Compose to choose which value to use:
+
+Compose file
+Shell environment variables
+Environment file
+Dockerfile
+Variable is not defined
+
+So, if we define a variable in the Compose file in the - environment section and also in a .env file, Compose will consider the variable declared in the Compose file from -environment section.
