@@ -17,6 +17,9 @@ either reach them by name or IP.
 
 - /etc/hosts: This is the important file. This file has all the reachable hosts with their IP addresses.
 
+
+
+
 Docker Communication
 
 By default, all containers run in the default network space of Docker. Hence, every container can communicate with others.
