@@ -89,6 +89,33 @@ In case it doesn’t receive the message from the leader within a stipulated tim
 
 When developing our system, we can write our own implementation of selecting a leader in a cluster, or we can use a library dedicatedly written to handle these cluster management tasks for us, like Apache Zookeeper.
 
+SUMMARY
+
+How do instances in a cluster communicate with each other?
+
+Instances send heartbeat signals to each other at regular intervals, and if an instance doesn’t respond within a stipulated time, it’s assumed offline.
+
+
+Why is persistent session storage needed in a cluster?
+
+All the nodes in the cluster persist their session storage in the persistent session storage. This storage facilitates the process of another node taking over if a certain node goes down in the cluster during an active user session.
+
+Which session replication mode should we choose when we need a consistent session state across the cluster?
+
+Synchronous session replication mode
+
+Which session replication mode should we choose when response latency is a priority in the cluster?
+
+Asynchronous session replication mode
+
+What is the need for achieving a consensus in a cluster?
+
+When a user requests the value of a certain object from the system, the system is expected to give one single consistent value of that object among the several different values that the thousands of nodes running in the cluster hold for that particular object. This is why a consensus needs to be achieved among the nodes in a distributed system.
+
+What is true about the leader node in a cluster?
+
+A leader node facilitates cluster coordination by assigning work and distributing tasks to the other nodes in the cluster.
+
 
 
 
