@@ -69,3 +69,62 @@ Containers are dependent on the underlying OS. They have to share and run on the
 When should we run our applications directly on VMs running on a bare metal server?
 When we need more security and flexibility in terms of operating systems running in each VM
 When we need to run multiple operating systems in the same machine
+
+
+Deploying different services with containers #
+Once we are done writing code and our microservices are ready, the next step is picking the right technology to deploy our code. In this use case, we’ll leverage the container technology to deploy our microservices.
+
+Why deploy in containers and not directly on VMs?
+
+We’ve already discussed the differences between the VMs and containers in the previous lesson. We know that running containers is cost-effective, lightweight, & consumes fewer resources. It’s also easier to manage and scale the system than running the services directly on VMs.
+
+Some stats: Uber runs over 4000 microservices.
+
+According to an InfoQ article, posted back in 2014, Google starts over two billion containers per week, three-thousand per second. You can imagine the container count at Google today.
+
+Imagine running all that code in VMs and the resources it would require.
+
+For container technology, we can pick Docker to run our services. To deploy one single microservice, we will first create a Docker image for it; the image will contain the application code, dependencies, configuration, libraries, and everything required to run that particular service. This step is known as containerizing the application.
+
+Once the image is created, we will deploy that image on the machine from the command line tool. Mounting images and running them as containers is done by the container engine.
+
+The container ecosystem also contains image registries that can be both public and private, just like the GitHub repositories. These registries contain container images as templates that can be reused with or without modifications at a later point in time.
+
+Revisiting the why containers and not VMs discussion, containers save engineering teams a solid amount of time by letting them off the hook for making the machine ready to run a particular service built with a certain technology stack.
+
+When built using microservices, the entire system isn’t built using one particular technology. All the different services are written using different technology stacks. Speaking of our social network application, we can write different modules using different technologies such as C++, Java, RoR, Go, Python, and so on.
+
+If it wasn’t for container technology, the operations team would have to ascertain that the machines are ready with respect to compatibility with a particular technology before the application is deployed.
+
+Now, when the number of microservices and their instances reaches the hundreds of thousands, this can become a huge pain.
+
+Additionally, a microservice that runs on a certain technology cannot be deployed on the machine prepped up for any other technology without making serious modifications to the environment.
+
+However, with containers, we don’t have to worry about all this stuff as they keep the environment isolated from the application code.
+
+Every microservice has its own specific configuration, dependencies, deployment requirements like scalability requirement, resource monitoring requirement, and so on.
+
+When there is a large number of microservices, containers cut down a great deal of hassle in application deployment and can assist the business decrease the time it takes to ship the software.
+
+The primary ways of deploying and running applications on the cloud are:
+
+Running the application directly in a virtual machine
+Running the application directly on bare-metal
+Running the application in a container running on either bare-metal or a virtual machine
+
+Multiple microservices per host #
+In this microservice deployment pattern, multiple microservices are deployed in a single host. The host can be a single virtual machine or a single physical bare-metal server.
+
+One straight-forward upside of doing this is the efficient use of the host resources.
+
+One downside of using this deployment approach is the noisy neighbor problem.
+
+Single microservice per host #
+In this deployment approach, only one microservice is deployed in a single host. There is no noisy neighbor problem in this approach. A single microservice has access to 100% of the host resources, making the approach more secure and reliable in comparison to the former approach.
+
+As the number of containers running gets higher, the infrastructure complexity increases. We need a system that we can leverage to easily manage so many containers. This is where container orchestration tools like Kubernetes, Docker Swarm, and Apache Mesos come in.
+
+https://www.cncf.io/case-studies/uber/
+https://dzone.com/articles/why-bare-metal-is-challenging-vms-in-microservices
+
+
