@@ -57,3 +57,38 @@ This avoids the single point of failure with respect to a data center. Also, lat
 All the highly-available, fault-tolerant design decisions are subjective to how critical the system is? What are the odds that the components will fail?.
 
 Businesses often use multi-cloud platforms to deploy their workloads, ensuring further availability. If things go south with one cloud provider, they have another to fall back over.
+
+ALGORITHMS for CONSENSUS
+
+When developing distributed or decentralized systems, there are several algorithms that can be used to achieve a consensus among the nodes in the cluster.
+
+A few of the popular and widely used consensus algorithms are:
+
+- Byzantine Fault Tolerance algorithm
+- Paxos algorithm
+- Raft algorithm
+- Proof of Work
+- Proof of Stake
+- Proof of Burn
+- Proof of Authority
+
+
+Google’s distributed lock service Chubby uses the Paxos consensus algorithm to keep the nodes in consensus. It uses a replicated database to store the lock-related information. The replication enables the service to be available when the nodes fail in the cluster. The replication database is written on top of a fault-tolerant log layer that uses the Paxos consensus algorithm.
+
+Bitcoin uses the Proof of Work algorithm to maintain a consensus among the nodes in its peer to peer network. Different cryptocurrencies use different consensus algorithms to get the desired behavior from their network.
+
+LEADER ELECTION
+
+A leader node among all the other nodes in a cluster is a privileged one. It has the power to assign work to the other nodes, distribute tasks to them, modify data, and so on. It is given the onus of facilitating cluster coordination efficiently.
+
+Different algorithms have different strategies to elect a leader. I’ll give you a general idea of how a leader is elected in a cluster.
+
+The consensus algorithm keeps the cluster functional as long as the majority (51%) of the nodes are running. When a new node is added to the cluster, it joins as a follower node. It waits for the heartbeat message from the leader of the cluster to acknowledge it’s onboarding.
+
+In case it doesn’t receive the message from the leader within a stipulated time, it becomes eligible to become the leader. Now, the new node broadcasts a message to all the other nodes in the cluster that it wants to become the leader. Based on a set of rules, the other nodes in the cluster may accept or reject the proposal.
+
+When developing our system, we can write our own implementation of selecting a leader in a cluster, or we can use a library dedicatedly written to handle these cluster management tasks for us, like Apache Zookeeper.
+
+
+
+
