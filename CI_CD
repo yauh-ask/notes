@@ -1,0 +1,133 @@
+What is continuous delivery? #
+Continuous delivery is a software delivery approach that enables engineering teams to deliver patches, updates, and new functionalities to the end-users over and over continually in short periods of time in a reliable and efficient way.
+
+With the adoption of this approach, developers can incrementally push even the smallest of the code changes/updates to production. There is no need to hold the deployment until there is a big chunk of updates, that is accumulated to be pushed to production.
+
+With this approach, software can be released multiple times a day, weekly, or whenever it fits best for the business.
+
+Why adopt the continuous delivery approach? #
+Here are a few upsides of adopting the continuous delivery approach:
+
+1. Easy troubleshooting and rollbacks #
+When small incremental changes are pushed to production, it’s easy to troubleshoot issues if they arise. It’s also easy to do regression testing and so on because everyone is aware of the small code’s impact on the system. Things are comparatively easy to comprehend.
+
+When the number of code changes pushed at one time becomes greater, tracking things gets a little tricky.
+
+Also, small incremental changes can be easily rolled-backed without breaking anything. Imagine pushing multiple patches, clubbed together, to production at one time. Say we push five small patches rolled into one to production together and, out of those five patches, one causes an issue. Now, because of that one patch, all five patches have to be rolled back. We might also have a hard time figuring out which patch went rogue.
+
+Therefore, pushing incremental changes is a cleaner approach.
+
+2. Increase in team’s productivity #
+Since there are no planned releases, developers can have their code pushed to production as soon as they commit it to the remote repository. The developer pushes their code after performing a thorough testing and code quality check on their local machine, and in a dev environment if required.
+
+Once they are happy, they can push the code to the remote repository and have their update go through an automated process of builds, different tests, and quality checks and directly to the production through a deployment pipeline.
+
+This continual release approach cuts down a lot of time required to push the software to production, increasing the team’s productivity. There will be more on this later.
+
+Life before continuous delivery #
+Back in the day, I worked on a big telecom project. The business came up with all sorts of fancy new voice call and data tariff plans for both their paid and prepaid customers on an on-going basis. Boy, it was intense making changes to the code and writing new features so frequently. Also, we did not have any sort of continuous delivery deployment model back then. The entire deployment process was manual.
+
+Pushing the code to production was really something. It was an effort.
+
+This is roughly how it was done: After the code was written, it was pushed to multiple staging environments. The builds, tests, quality checks everything was run manually.
+
+After the builds, tests, and other quality checks were successful, we had a manual testing team test all the changes, including performing the regression testing. They had to test if the new changes broke any of the existing functionalities.
+
+Also, there were no automated browser tests, no selenium, etc. Everything had to be manually tested from scratch, and only when the testing team gave the green light, the code was released to production.
+
+We generally choose one day on the weekend, usually Saturdays, to push the code to production. Also, all the development across different teams was put on hold during the release.
+
+You can imagine the amount of time a small code change took to move to production. I mean this wasn’t even feasible. Every small change had to be accumulated into one for a major release. Writing the code took 50 to 55% of the time. The rest of the time was dedicated to testing and deployment. This was a major time sink, and it impeded productivity. If things were automated back then, it would have doubled the feature release velocity of the team.
+
+Although I agree, not everything can be automated, and there are scenarios where we cannot do without manual testing. Still, the continuous delivery and the continuous deployment approach would have saved us a lot of time.
+
+What is continuous deployment? #
+Continuous deployment is a term that has a meaning similar to continuous delivery. The only difference is that in continuous deployment the entire software release process is automated. There is zero manual intervention.
+
+Automating everything is tricky because we often have to place manual checks in between the pipeline to ensure things work as expected. This becomes more important when the software being developed is for an airline company, a medical life support system, and so on. We cannot just let the automation take over and decide everything for itself.
+
+Automated tests never cover the product comprehensively. Therefore, we have to look out for the corner cases manually. We need humans for that.
+
+Businesses often leverage both the continuous delivery and continuous deployment approach to build their deployment pipelines. Test-driven development and containerization help big time in the implementation of both the approaches, facilitating a quicker move to production.
+
+Test-driven development ensures a good code coverage and thorough testing of code behavior. Containerization facilitates managed deployments.
+
+Enables the business to stay ahead of the competition #
+By delivering new features to the customers more often, the business can get customer feedback earlier, subsequently making the service better than the competition. This enables the business to continually innovate and stay ahead of the curve.
+
+We are all aware of the importance of moving fast in the industry. Competition is brutal. Evolution is happening at an exponential rate. This made the software development process evolve from the waterfall approach to the agile methodology and from quarterly code releases to continuous delivery and deployment.
+
+If you are an early mover in the market, you kind of get a bit of leeway in perfecting your product, overcoming the limitations and issues if it has any. This is due to the fact you are the first to bring the product or the feature to the market.
+
+Imagine releasing a buggy software or software with limited features to the end-users when you already have a competition in the same niche that is offering top-notch service.
+
+Here are some of the real-world examples that provide insight into the need for continuous delivery.
+
+Need for continuous delivery – Real-world examples #
+Browser war #
+Browsers are our portal to the web, making them data mines to the companies. The competition to attract users to use their products is fierce. Some of the big names in the game are Chrome, Firefox, UC, Opera, and so on.
+
+If you don’t move fast, there is no survival as companies are innovating at a quick rate. To move fast, we need to cut down the deployment time as much as possible.
+
+Chrome always has so many frequent updates. Whenever I happen to look at the top right corner of the browser, I always see that green update icon.
+
+UC browser offers so many features out of the box, including messenger integrations, VPN, social features, news etc. It already has a firm grip on the Asian market.
+
+What is a deployment pipeline? #
+The deployment pipeline is an implementation of the continuous delivery and the continuous deployment approach. It’s a step-by-step specification on how the code should flow from the point it is pushed from the developer’s laptop to the remote repository to the point that the code commit is finally deployed to production.
+
+We refer to this structured process of code deployment as the deployment pipeline because it enables the code to flow from one starting point to an endpoint. This is the production, going through a series of stages in between, just like the water flows through a pipeline in a well-directed fashion. The in-between stages are the code builds, unit tests, integration tests, code quality checks, and so on.
+
+Businesses can structure their pipeline as per their requirements. There is no standard rule on how a pipeline should be built. The whole point of creating a pipeline is to deploy the code to production as efficiently as possible with minimal human intervention and time investment.
+
+Deployment workflow #
+Here are the general stages that the code goes through in a deployment pipeline:
+
+After writing the code, running the build, and testing it on the local machine, the developer pushes the code to the remote repository such as GitHub.
+
+Once the code is committed to the remote repository, an automated build process is triggered powered by tools like Jenkins. Jenkins is an open-source automation tool used for continuous integration. You will see more on this later. The build process runs several checks on the code in series, such as static code analysis, code quality checks, compliance with the coding standards and formatting set by the organization, and so on.
+
+Units tests, integration tests, and other tests also get triggered in the same build to test the code.
+
+Once the build is complete, the new patch or the feature developed by the developer may be manually checked by the designated tester on the team. This helps in testing corner cases and regression testing.
+
+Once the testing is done, the code is deployed to multiple environments such as staging and any other environments set by the engineering team.
+
+_ User Acceptance Testing (UAT)_ is generally performed by the product manager in these environments to ensure everything looks good and works as expected. Load and stress tests are also run in a pre-production environment, which is a replica of the production environment.
+
+Once everything looks okay, the code is pushed to production.
+
+These are the common stages you’ll find in a deployment pipeline. You can always tweak these based on your requirements.
+
+During the deployment process, if anything fails at any stage, the entire deployment process is killed following a fail-fast approach. The system sends notifications to the concerned members of the team for the issue to be fixed immediately.
+
+Developers are advised to only push the code to the remote repo after they perform thorough testing on their local machine. This is done to avoid any build breaks in the pipeline due to the broken code, which is often frowned upon.
+
+What is continuous integration? #
+Continuous integration is a software development practice where all the developers in the team push their code to the remote repository as frequently as possible, as opposed to holding the code that they work on, on their local machine, for a longer period of time.
+
+How does pushing the code so often help?
+
+There are several upsides to the continuous integration approach:
+
+In case the developer’s machine fails, all the code they have worked on is not lost since it’s frequently pushed to the remote repository.
+
+Every code push triggers the build and tests; this continually ensures the code quality and its correctness, as opposed to testing a major change at the end. Smaller changes are easy to merge with the mainline. Frequently checking in code helps the developer fix the issues early, with ease, and with less debugging.
+
+Team members can see your code often and provide early feedback.
+
+The biggest upside of continuous integration is avoiding code integration issues. Imagine a scenario, where a new feature is being developed by the team. For the new feature development, a new branch is created from the master and everyone pulls the code from the branch in their local machine to start working on it.
+
+In this scenario, if everyone frequently pushes their code changes to the same branch, it’s easy to resolve code conflicts on an ongoing basis when integrating the code. Imagine the situation, when at the end of the sprint, everyone finally pushes their code to the same branch. It would be a merge hell.
+
+Blue-green deployments #
+Returning to the deployment pipeline, when the code is deployed to production, engineering teams often create a replica of the production environment. This gives the team two mirror production environments; one is called blue and the other green. This is done to avoid any sort of service downtime during code deployment.
+
+So, how does this work?
+
+In the blue-green deployment approach, only one production environment is live, or handling the traffic on the app, at any point in time. When the code is deployed, it is deployed on the environment that is not live so that the live production environment remains unaffected from the new deployment.
+
+Once everything is tested in the environment in which the code is deployed and the team is satisfied, the traffic is switched to the non-live environment, making it live. The same process is repeated during the next deployment.
+
+https://eng.uber.com/micro-deploy-code/
+
