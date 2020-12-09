@@ -22,3 +22,16 @@ Using SQS, you can send, store, and receive messages between software components
 SWF – Simple WorkFlow Service is used to trigger a workflow. For example, imagine that you have an expense report that needs to be approved by 3 people.
 
 When you submit an experience report the workflow is triggered and the workflow services keeps track of each individual who needs to approve for your expenses report to be fully approved.
+
+
+Availability Zones & Regions
+AWS has 16 Regions & 44 Availability zones.
+
+A Region is a geographically distinct area e.g. West coast of USA
+
+Availability zones are Datacenters within a region. The availability zones are fault tolerant between each other. Each Availability Zone (AZ) has its own power, and are independent to other AZ within that region.
+
+Ideally, you design your application to be across more than one AZ that way if one AZ goes down you have another.
+
+When designing application you try to have redundancy between the three AZs. That way if AZ1 goes down due to a power failure, AZ2 will be alive and will not be affected and in turn, your applications and its underlying data are not affected.
+
